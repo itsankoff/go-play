@@ -10,7 +10,7 @@ import (
 func Hasher(root string) (map[string][md5.Size]byte, error) {
 	files := make(map[string][md5.Size]byte)
 	err := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
-		if info.IsDir() {
+		if !info.Mode().IsRegular() {
 			return nil
 		}
 
